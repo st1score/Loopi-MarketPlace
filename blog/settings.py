@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
+import os
 
 from pathlib import Path
 
@@ -26,6 +27,21 @@ SECRET_KEY = 'django-insecure-%v(w-1n=03@=p(+r%jovvr$ie!rnbov9u$scv%b7#-zer)wa1z
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+# 4 лаба добавление поста и редактирование поста, добавление картинки и так далее
+# CRUD операция
+# Create
+# Read
+# Update
+# Delete
+# 
+# 5
+# авторизация
+# и проверка по email
+# 6
+# заканчивает с авторизацией
+
+
 
 
 # Application definition
@@ -54,7 +70,9 @@ ROOT_URLCONF = 'blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates',
+                BASE_DIR / 'products' / 'templates',
+                ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,3 +152,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
