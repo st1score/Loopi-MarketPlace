@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
+import os
 
 from pathlib import Path
 
@@ -26,6 +27,21 @@ SECRET_KEY = 'django-insecure-%v(w-1n=03@=p(+r%jovvr$ie!rnbov9u$scv%b7#-zer)wa1z
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+# 4 лаба добавление поста и редактирование поста, добавление картинки и так далее
+# CRUD операция
+# Create
+# Read
+# Update
+# Delete
+# 
+# 5
+# авторизация
+# и проверка по email
+# 6
+# заканчивает с авторизацией
+
+
 
 
 # Application definition
@@ -54,7 +70,9 @@ ROOT_URLCONF = 'blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates',
+                BASE_DIR / 'products' / 'templates',
+                ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,3 +152,19 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+<<<<<<< Updated upstream
+=======
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.mail.ru' 
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'sem.trachuk00@mail.ru'
+EMAIL_HOST_PASSWORD = 'ChQkBeqA4cHse12BvpBk'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+>>>>>>> Stashed changes
