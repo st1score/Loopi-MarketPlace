@@ -1,0 +1,111 @@
+{% extends 'products/base.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<style>
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    margin-top: 40px;
+    font-family: Arial, sans-serif;
+  }
+
+  .info-box {
+    flex: 1;
+    max-width: 400px;
+  }
+
+  .form-box {
+    flex: 1;
+    max-width: 400px;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgb(0 0 0 / 0.1);
+  }
+
+  .form-box h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="password"],
+  form input[type="tel"] {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  form button:hover {
+    background-color: #0056b3;
+  }
+
+  .errors {
+    color: #d9534f;
+    margin-bottom: 15px;
+  }
+</style>
+
+<div class="container">
+  <div class="info-box">
+    <h1>Добро пожаловать!</h1>
+    <p>Зарегистрируйтесь, чтобы получить доступ к эксклюзивным товарам и возможностям нашего сайта.</p>
+    <p>После регистрации вы сможете добавлять товары, оставлять отзывы и многое другое.</p>
+  </div>
+
+  <div class="form-box">
+    <h2>Регистрация</h2>
+    <form method="post" action="{% url 'registration' %}" novalidate>
+
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+      <div class="errors">{{ form.non_field_errors }}</div>
+      {% endif %}
+
+      {{ form.first_name.errors }}
+      {{ form.first_name }}
+
+      {{ form.last_name.errors }}
+      {{ form.last_name }}
+
+      {{ form.email.errors }}
+      {{ form.email }}
+
+      {{ form.phone.errors }}
+      {{ form.phone }}
+
+      {{ form.password1.errors }}
+      {{ form.password1 }}
+
+      {{ form.password2.errors }}
+      {{ form.password2 }}
+
+      <button type="submit">Зарегистрироваться</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
