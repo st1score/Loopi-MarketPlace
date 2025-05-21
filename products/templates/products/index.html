@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная | Loopi{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Популярные товары</h1>
+
+<div class="mb-4 text-end">
+  <a href="{% url 'add_product' %}" class="btn btn-primary">➕ Добавить товар</a>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for product in products%}
+    <div class="col">
+      <div class="card h-100">
+        {% if product.image %}
+          <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+        {% else %}
+          <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Нет изображения">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">
+            <a href="{% url 'product_detail' product.pk %}" class="text-decoration-none text-dark">
+              {{ product.name }}
+            </a>
+          </h5>
+          <p class="card-text">{{ product.description|truncatewords:20 }}</p>
+          <p class="fw-bold">₽{{ product.price }}</p>
+          <a href="#" class="btn btn-success w-100">В корзину</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

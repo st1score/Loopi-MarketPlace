@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {% if form.instance.pk %}Редактировать{% else %}Добавить{% endif %} товар | Loopi
+{% endblock %}
+
+{% block content %}
+  <h2 class="mb-4">
+    {% if form.instance.pk %}✏️ Редактировать{% else %}➕ Добавить{% endif %} товар
+  </h2>
+
+  <form method="post" enctype="multipart/form-data" class="mb-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">💾 Сохранить</button>
+    <a href="{% url 'product_list' %}" class="btn btn-secondary">🔙 Назад</a>
+  </form>
+{% endblock %}

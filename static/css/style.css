@@ -1,0 +1,48 @@
+
+body { 
+    background: hsl(212, 87%, 79%); 
+    color: #0062ff;
+    border: #28a745;
+    padding: 1em 1em;
+    border-radius: 5px;
+}
+
+/* базовый <button> */
+button {
+  background-color: #c71111;   /* синий фон */
+  color: #ffffff;              /* белый текст */
+  border: none;
+  padding: 0.6em 1.2em;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* <input type="submit"> */
+input[type="submit"] {
+  background-color: #28a745;   /* зелёный фон */
+  color: #fff;
+  padding: 0.6em 1.2em;
+  border-radius: 4px;
+}
+
+/* если у тебя вёрстка сделана через фреймворк (Bootstrap, Bulma и т.п.) — часто кнопки имеют класс .btn */
+.btn {
+  background-color: #00bfff;   /* оранжевый */
+  color: #000000 !important;
+  padding: 0.6em 1.2em;
+  border-radius: 6px;
+}
+
+/* Состояния наведения/нажатия */
+button:hover,
+input[type="submit"]:hover,
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* отключённые кнопки */
+button:disabled,
+input[type="submit"]:disabled {
+  background-color: #666 !important;
+  cursor: not-allowed;
+}
