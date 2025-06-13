@@ -1,0 +1,167 @@
+{% extends 'products/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Список товаров" %}{% endblock %}
+
+{% block content %}
+<style>
+  .page-container {
+    display: flex;
+    gap: 40px;
+    margin-top: 30px;
+    font-family: Arial, sans-serif;
+  }
+
+  .products-list {
+    flex: 2;
+  }
+
+  .registration-form {
+    flex: 1;
+    padding: 25px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f7f9fc;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 400px;
+    height: fit-content;
+  }
+
+  .registration-form h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .registration-form form input[type="text"],
+  .registration-form form input[type="email"],
+  .registration-form form input[type="password"],
+  .registration-form form input[type="tel"] {
+    width: 100%;
+    padding: 10px 14px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    box-sizing: border-box;
+  }
+
+  .registration-form form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .registration-form form button:hover {
+    background-color: #0056b3;
+  }
+
+  .errors {
+    color: #d9534f;
+    margin-bottom: 12px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  ul li {
+    padding: 12px 10px;
+    border-bottom: none;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background:rgb(188, 221, 255);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  ul li:hover {
+    box-shadow: 0 4px 15px rgba(0, 30, 255, 0.48);
+  }
+
+  ul li img {
+    margin-top: 8px;
+    border-radius: 4px;
+  }
+</style>
+
+<div class="page-container">
+  <div class="products-list">
+    <h1>{% trans "Список товаров" %}</h1>
+    <a href="{% url 'product_create' %}" class="btn btn-primary mb-3">➕ {% trans "Добавить товар" %}</a>
+
+    <ul>
+      {% if products %}
+        {% for product in products %}
+          <li>
+            <strong>{{ product.name }}</strong> — {{ product.price }} ₸<br>
+            {% trans "Категория" %}: {{ product.category.name }}<br>
+            {% trans "Продавец" %}: {{ product.vendor.name }}<br>
+            {% if product.image %}
+              <img src="{{ product.image.url }}" alt="{{ product.name }}" width="120">
+            {% endif %}<br>
+    
+            <div class="mt-2">
+              <a href="{% url 'product_update' product.pk %}" class="btn btn-sm btn-warning">✏️ {% trans "Редактировать" %}</a>
+              {% comment %} <a href="{% url 'product_delete' product.pk %}" class="btn btn-sm btn-danger">🗑️ {% trans "Удалить" %}</a> {% endcomment %}
+              <a href="{% url 'add_to_cart' product.id %}" class="btn btn-sm btn-success">🛒 {% trans "Добавить в корзину" %}</a>
+            </div>
+          </li>
+        {% endfor %}
+      {% else %}
+        <li class="alert alert-info">
+          {% if request.GET.q %}
+            {% trans "Ничего не найдено по запросу:" %} "{{ request.GET.q }}"
+          {% else %}
+            {% trans "Нет товаров." %}
+          {% endif %}
+        </li>
+      {% endif %}
+    </ul>
+    
+  </div>
+
+  <div class="registration-form">
+    <h2>{% trans "Регистрация" %}</h2>
+    <form method="post" action="{% url 'registration' %}" novalidate>
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
+        <div class="errors">{{ form.non_field_errors }}</div>
+      {% endif %}
+
+      {{ form.first_name.errors }}
+      {{ form.first_name }}
+
+      {{ form.last_name.errors }}
+      {{ form.last_name }}
+
+      {{ form.email.errors }}
+      {{ form.email }}
+
+      {{ form.phone.errors }}
+      {{ form.phone }}
+
+      {{ form.password1.errors }}
+      {{ form.password1 }}
+
+      {{ form.password2.errors }}
+      {{ form.password2 }}
+
+      <button type="submit">{% trans "Зарегистрироваться" %}</button>
+    </form>
+
+    <p style="margin-top: 15px;">
+      {% trans "Уже зарегистрированы?" %} <a href="{% url 'login' %}">{% trans "Войти" %}</a>
+    </p>
+  </div>
+</div>
+
+{% endblock %}
