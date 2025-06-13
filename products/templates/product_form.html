@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% if form.instance.pk %}
+    {% trans "Редактировать" %}
+  {% else %}
+    {% trans "Добавить" %}
+  {% endif %}
+  {% trans "товар" %} | Loopi
+{% endblock %}
+
+{% block content %}
+  <h2 class="mb-4">
+    {% if form.instance.pk %}
+      ✏️ {% trans "Редактировать товар" %}
+    {% else %}
+      ➕ {% trans "Добавить товар" %}
+    {% endif %}
+  </h2>
+
+  <form method="post" enctype="multipart/form-data" class="mb-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">💾 {% trans "Сохранить" %}</button>
+    <a href="{% url 'product_list' %}" class="btn btn-secondary">🔙 {% trans "Назад" %}</a>
+  </form>
+{% endblock %}
