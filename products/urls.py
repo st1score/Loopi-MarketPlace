@@ -18,6 +18,12 @@ from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from . import views
 
+from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
+from django.views.i18n import set_language
+
+
+
 urlpatterns = [
     path('', views.product_list, name='product_list'),
     path('products/', views.product_list, name='product_list'),
@@ -27,7 +33,12 @@ urlpatterns = [
     path('<int:pk>/delete/', views.product_delete, name='product_delete'),
     path('product/<int:pk>/', views.product_detail, name='product_detail'),
     path('user/', include('user.urls')),
-
+    
+    
+    #Мультиязычность 
+    path('i18n/', include('django.conf.urls.i18n')),
+    path('i18n/setlang/', set_language, name='set_language'),
+    
     # КОРЗИНА
     path('cart/', views.view_cart, name='view_cart'),
     path('cart/add/<int:product_id>/', views.add_to_cart, name='add_to_cart'),

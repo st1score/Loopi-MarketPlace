@@ -16,6 +16,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+AUTH_USER_MODEL = 'user.User'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -60,6 +61,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'products',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -110,6 +113,18 @@ DATABASES = {
         'PORT': '5433',
     }
 }
+# Админка
+# Почта: admin@admin.kz
+# Имя : admin
+# Пароль : admin
+# 
+# Почта: seller1@seller.kz
+# Имя пользователя: seller1
+# Password: seller1
+# 
+# 
+# 
+
 '''
 Найди где у тебя запущен сервер на 8000 порту и закрой его 
 сейчас я этот проект запустил на порте 8080
@@ -173,12 +188,15 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+STATICFILES_DIRS = [BASE_DIR , "static"]
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-<<<<<<< Updated upstream
-=======
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -192,4 +210,3 @@ EMAIL_USE_SSL = True
 EMAIL_HOST_USER = 'sem.trachuk00@mail.ru'
 EMAIL_HOST_PASSWORD = 'ChQkBeqA4cHse12BvpBk'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
->>>>>>> Stashed changes

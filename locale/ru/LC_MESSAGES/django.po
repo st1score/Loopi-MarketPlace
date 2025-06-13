@@ -1409,3 +1409,60 @@ msgid ""
 "После регистрации вы сможете добавлять товары, оставлять отзывы и многое "
 "другое."
 msgstr ""
+
+msgid "First name"
+msgstr "Имя"
+
+msgid "Last name"
+msgstr "Фамилия"
+
+msgid "Full name"
+msgstr "Полное имя"
+
+msgid "Phone number"
+msgstr "Номер телефона"
+
+msgid "Address"
+msgstr "Адрес"
+
+msgid "City"
+msgstr "Город"
+
+msgid "Country"
+msgstr "Страна"
+
+msgid "Postal code"
+msgstr "Почтовый индекс"
+
+msgid "Date of birth"
+msgstr "Дата рождения"
+
+msgid "Gender"
+msgstr "Пол"
+
+msgid "Male"
+msgstr "Мужской"
+
+msgid "Female"
+msgstr "Женский"
+
+msgid "Other"
+msgstr "Другой"
+
+msgid "Profile"
+msgstr "Профиль"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Language"
+msgstr "Язык"
+
+msgid "Help"
+msgstr "Помощь"
+
+msgid "Privacy policy"
+msgstr "Политика конфиденциальности"
+
+msgid "Terms of service"
+msgstr "Условия использования"

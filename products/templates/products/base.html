@@ -1,7 +1,7 @@
 {% load static %}
 {% load i18n %}
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +21,15 @@
        style="text-decoration: none; transition: all 0.3s ease;">
       Loopi
     </a>
+
+    <form action="/i18n/setlang/" method="post" style="display: inline;">
+
+  {% csrf_token %}
+  <select name="language" onchange="this.form.submit()" class="form-select form-select-sm w-auto d-inline-block">
+    <option value="ru" {% if LANGUAGE_CODE == 'ru' %}selected{% endif %}>🇷🇺 Русский</option>
+    <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>🇬🇧 English</option>
+  </select>
+    </form>
 
     <div class="d-flex align-items-center">
       <form class="d-flex me-3" role="search" method="get" action="{% url 'product_list' %}">
