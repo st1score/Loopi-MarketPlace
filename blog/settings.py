@@ -9,11 +9,20 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
+import os
 
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+AUTH_USER_MODEL = 'user.User'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,6 +36,21 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# 4 лаба добавление поста и редактирование поста, добавление картинки и так далее
+# CRUD операция
+# Create
+# Read
+# Update
+# Delete
+# 
+# 5
+# авторизация
+# и проверка по email
+# 6
+# заканчивает с авторизацией
+
+
+
 
 # Application definition
 
@@ -37,11 +61,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'products',
+    'user',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    
+    'django.middleware.locale.LocaleMiddleware',
+    
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -54,7 +83,9 @@ ROOT_URLCONF = 'blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates',
+                BASE_DIR / 'products' / 'templates',
+                ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,6 +113,18 @@ DATABASES = {
         'PORT': '5433',
     }
 }
+# Админка
+# Почта: admin@admin.kz
+# Имя : admin
+# Пароль : admin
+# 
+# Почта: seller1@seller.kz
+# Имя пользователя: seller1
+# Password: seller1
+# 
+# 
+# 
+
 '''
 Найди где у тебя запущен сервер на 8000 порту и закрой его 
 сейчас я этот проект запустил на порте 8080
@@ -116,7 +159,22 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
+from django.utils.translation import gettext_lazy as _
+
+
 LANGUAGE_CODE = 'ru'
+
+USE_I18N = True
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('ru', 'Русский'),
+]
+LOCALE_PATHS = [
+    
+    BASE_DIR / 'locale',
+    os.path.join(BASE_DIR, 'locale'),
+]
 
 TIME_ZONE = 'UTC'
 
@@ -130,7 +188,25 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+STATICFILES_DIRS = [BASE_DIR , "static"]
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.mail.ru' 
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'sem.trachuk00@mail.ru'
+EMAIL_HOST_PASSWORD = 'ChQkBeqA4cHse12BvpBk'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
